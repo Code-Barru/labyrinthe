@@ -44,7 +44,6 @@ void Grid::init(){
     
     create_grid(window,maze0,maze_size);
 
-    this->maze = maze0;
     
     while(window.isOpen()){
         sf::Event event;
