@@ -30,4 +30,8 @@ class Cell {
         Cell(int value){
             this->value = value;
         }
+
+        Cell(){
+            
+        }
 };

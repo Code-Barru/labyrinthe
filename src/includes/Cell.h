@@ -18,6 +18,7 @@ class Cell {
         void set_value(int value);
 
         Cell(int value);
+        Cell();
 };
 
 #endif
