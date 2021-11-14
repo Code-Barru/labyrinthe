@@ -1,26 +1,31 @@
 #include "utils.h"
+#include "cell.h"
 #include <SFML/Graphics.hpp>
 #include <Windows.h>
 #include <iostream>
-#include <vector>
 #include <winuser.h>
+#include <vector>
 
+using std::vector;
 class Grid {
 
 private:
-    
+    vector<vector<Cell>> maze;
 
 public:
-    std::vector<std::vector<int>> maze;
+
+    Grid(){
+        
+    }
 
     void init();
 
-    std::vector<std::vector<int>>& get_maze(){
-        return maze;
+    vector<vector<Cell>> get_maze(){
+        return this->maze;
     }
-
-    void set_maze(std::vector<std::vector<int>> &m){
-        maze = m;
+    
+    void set_maze(vector<vector<Cell>> m){
+        this->maze = m;
     }
 
 };
@@ -39,11 +44,9 @@ void Grid::init(){
 
     window.setVerticalSyncEnabled(true);
 
-    std::vector<std::vector<int>> maze0;
-    
-    
-    create_grid(window,maze0,maze_size);
+    vector<vector<Cell>> maze;
 
+    create_grid(window,maze,maze_size);
     
     while(window.isOpen()){
         sf::Event event;

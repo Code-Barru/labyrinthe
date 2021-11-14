@@ -27,4 +27,7 @@ class Cell {
             this->value = value;
         }
 
+        Cell(int value){
+            this->value = value;
+        }
 };

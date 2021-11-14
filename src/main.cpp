@@ -2,8 +2,8 @@
 
 int main()
 {
-    Grid grid;
-    grid.init();
+    Grid* grid = new Grid();
+    grid->init();
 
     return 0;
 }
