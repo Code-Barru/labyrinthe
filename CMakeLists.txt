@@ -3,7 +3,7 @@ project(programme)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(nibbles src/main.cpp src/Utils/utils.cpp src/Grid/Grid.cpp src/Grid/Cell.cpp )
+add_executable(nibbles src/main.cpp src/Utils/utils.cpp src/Grid/Grid.cpp src/Grid/Cell.cpp src/Utils/graphics.cpp )
 
 include_directories(headers /usr/include c:/SFML/include)
 
