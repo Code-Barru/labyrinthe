@@ -4,8 +4,9 @@
 #include <iostream>
 #include <winuser.h>
 #include <vector>
-#include "utils.h"
-#include "Cell.h"
+
+#include "../Utils/include/utils.h"
+#include "include/Cell.h"
 
 using std::vector;
 class Grid {

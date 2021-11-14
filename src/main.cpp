@@ -1,4 +1,4 @@
-#include "includes/Grid.h"
+#include "Grid/include/Grid.h"
 
 int main()
 {

@@ -3,7 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <vector>
-#include "cell.h"
+#include "../../Grid/include/Cell.h"
 
 using std::vector;
 

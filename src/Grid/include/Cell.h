@@ -9,6 +9,9 @@ class Cell {
         int value;
 
     public:
+        Cell(int value);
+        Cell();
+        
         Cell(sf::Color color, int value);
 
         sf::Color get_color();
@@ -17,8 +20,7 @@ class Cell {
         int get_value();
         void set_value(int value);
 
-        Cell(int value);
-        Cell();
+        
 };
 
 #endif

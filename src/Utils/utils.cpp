@@ -1,7 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <iostream>
-#include "Cell.cpp"
+#include "../Grid/include/Cell.h"
 #include <Windows.h>
 
 using std::vector;

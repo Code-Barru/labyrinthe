@@ -1,7 +1,7 @@
 #ifndef GRID_H
 #define GRID_H
 
-#include "utils.h"
+#include "../../Utils/include/utils.h"
 #include <SFML/Graphics.hpp>
 #include <Windows.h>
 #include <iostream>
@@ -22,6 +22,5 @@ class Grid {
         vector<vector<Cell>> get_maze();
         void set_maze(vector<vector<Cell>> m);
 };
-
 
 #endif
