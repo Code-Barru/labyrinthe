@@ -2,4 +2,4 @@ build
 cmake_modules
 cmake-build-debug
 .cache
-.vscode
+.vscode/
