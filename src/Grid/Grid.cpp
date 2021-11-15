@@ -37,7 +37,7 @@ void Grid::init(){
     
     ::ShowWindow(::GetConsoleWindow(), SW_HIDE);
 
-    int maze_size = 59;
+    int maze_size = 89;
 
     sf::RenderWindow window(
         sf::VideoMode(maze_size * 10, maze_size * 10),
@@ -49,16 +49,20 @@ void Grid::init(){
 
     vector<vector<Cell>> maze;
 
-    generate_maze(window,maze,maze_size,true);
-
     this->set_maze(maze);
-    
+
+    generate_maze(window,maze,maze_size,true);
+    solve_maze(window, maze, maze_size);
+
     while(window.isOpen()){
+        
         sf::Event event;
 
         while(window.pollEvent(event)) {
             if(event.type == sf::Event::Closed)
                 window.close();
         }
+
+    
     }
 }

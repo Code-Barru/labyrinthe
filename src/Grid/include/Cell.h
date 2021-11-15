@@ -9,6 +9,7 @@ class Cell {
         int value;
 
     public:
+        int x,y;
         Cell(int value);
         Cell();
         
@@ -20,7 +21,11 @@ class Cell {
         int get_value();
         void set_value(int value);
 
-        
+        int getX();
+        int getY();
+
+        void setX(int x);
+        void setY(int y);
 };
 
 #endif

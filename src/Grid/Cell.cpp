@@ -1,8 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "include/Cell.h"
 
-
-
 sf::Color Cell::get_color(){
     return this->color;
 }
@@ -25,4 +23,20 @@ Cell::Cell(int value){
 
 Cell::Cell(){
     
+}
+
+int Cell::getX(){
+    return this->x;
+}
+
+int Cell::getY(){
+    return this->y;
+}
+
+void Cell::setX(int x){
+    this->x = x;
+}
+
+void Cell::setY(int y){
+    this->y = y;
 }

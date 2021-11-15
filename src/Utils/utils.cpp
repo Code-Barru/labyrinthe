@@ -4,8 +4,19 @@
 #include "../Grid/include/Cell.h"
 #include "include/graphics.h"
 #include <Windows.h>
+#include <cmath>
+
 
 using std::vector;
+
+void event(sf::RenderWindow &window){
+    sf::Event event;
+
+    while(window.pollEvent(event)) {
+        if(event.type == sf::Event::Closed)
+            window.close();
+    }
+}
 
 bool is_finished(vector<vector<Cell>> &maze, int maze_size){
 
@@ -21,8 +32,6 @@ bool is_finished(vector<vector<Cell>> &maze, int maze_size){
 
     return true;
 }
-
-
 
 void create_grid(sf::RenderWindow& window,vector<vector<Cell>> &maze, int maze_size){
     
@@ -57,8 +66,7 @@ void create_grid(sf::RenderWindow& window,vector<vector<Cell>> &maze, int maze_s
     for (int i=0 ; i < maze_size ; i++){
         for (int j=0 ; j < maze_size ; j++){
             if (maze[i][j].get_value() != -1){
-                maze[i][j].set_value(tmp++);
-                
+                maze[i][j].set_value(tmp++);   
             }
         }
     }
@@ -133,18 +141,20 @@ void generate_maze(sf::RenderWindow& window,vector<vector<Cell>> &maze, int maze
             }
 
             update_grid_graphics(window,maze,maze_size);
-        
+            event(window);
         }
     }
-
 
     for (int i = 0 ; i < maze_size ; i++) {
         for (int j = 0 ; j < maze_size ; j++) {
             if ((i == 0 && j == 1) || (i == maze_size-1 && j == maze_size-2))
                 continue;
-                if (maze[i][j].get_value() != -1 )
-                    maze[i][j].set_value(0);
-                
+            if (maze[i][j].get_value() != -1 ){
+                maze[i][j].set_value(0);
+                maze[i][j].set_color(sf::Color(255,255,255));
+            }     
+            maze[i][j].setX(i);
+            maze[i][j].setY(j);
         }
     }
 
@@ -165,4 +175,86 @@ void generate_maze(sf::RenderWindow& window,vector<vector<Cell>> &maze, int maze
 
         update_grid_graphics(window,maze,maze_size);
     }
+}
+
+
+int distance(Cell cell_1, Cell cell_2){
+    float tmp1 = ( cell_1.getX() - cell_2.getX() )^2;
+    float tmp2 = ( cell_1.getY() + cell_2.getY() )^2;
+    return static_cast<int>(sqrt(  tmp1 + tmp2 ));
+}
+
+void set_neighbour(vector<vector<Cell>> &maze, Cell cell, int etape, int maze_size, int x, int y){
+    for (int i = x - 1 ; i < x + 2 ; i++){
+        for (int j = y - 1 ; j < y + 2 ; j++){        
+            if (i != x && j != y)
+                continue;
+            if (maze[i][j].get_value() == 0 ){
+                maze[i][j].set_value(etape+1);
+                maze[i][j].set_color(sf::Color(255,255,0));
+            }
+        }
+    }
+}
+
+void solve_maze(sf::RenderWindow &window, vector<vector<Cell>> &maze, int maze_size){
+
+    Cell start = maze[1][1];
+    maze[maze_size-2][maze_size-2].set_value(1);
+    maze[maze_size-2][maze_size-2].set_color(sf::Color(255,255,0));
+
+    int etape = 1;
+
+    while (maze[1][1].get_value() == 0){
+
+        for (int i = 0 ; i < maze_size - 1 ; i++){
+            for (int j = 0 ; j < maze_size - 1 ; j++){
+                if (maze[i][j].get_value() == etape)
+                    set_neighbour(maze, maze[i][j],etape, maze_size, i, j);
+                
+            }    
+        }
+        event(window);
+        update_grid_graphics(window, maze, maze_size);
+        etape++;
+    }
+
+    for (int i = 0 ; i < maze_size ; i++) {
+        for (int j = 0 ; j < maze_size ; j++) {
+            if (maze[i][j].get_value() != -1 ){
+                maze[i][j].set_color(sf::Color(255,255,255));
+            }     
+        }
+    }
+
+
+    int x = 1;
+    int y = 1;
+    Cell *tmp = &maze[x][y];
+
+    tmp->set_color(sf::Color(0,255,0));
+    maze[0][1].set_color(sf::Color(0,255,0));
+
+    while (etape != 0){
+        for (int i = x - 1 ; i < x + 2 ; i++){
+            for (int j = y - 1 ; j < y + 2 ; j++){
+                if (i != x && j != y)
+                    continue;
+                if (maze[i][j].get_value() == etape - 1){
+                    tmp = &maze[i][j];
+                    maze[i][j].set_color(sf::Color(0,255,0));
+                }
+            }
+        }
+
+        x = tmp->getX();
+        y = tmp->getY();
+        
+        update_grid_graphics(window, maze, maze_size);
+        event(window);
+        etape--;
+    }
+
+    maze[maze_size - 1][maze_size - 2].set_color(sf::Color(0,255,0));
+    update_grid_graphics(window, maze, maze_size);
 }
