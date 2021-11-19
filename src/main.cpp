@@ -2,10 +2,13 @@
 
 int main()
 {
-    Grid* grid = new Grid();
-    grid->init();
+    while(true){
+        Grid* grid = new Grid();
+        grid->init();
 
-    delete grid;
+        delete grid;
+    }
+
     
     return 0;
 }

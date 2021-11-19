@@ -21,9 +21,7 @@ Cell::Cell(int value){
     this->value = value;
 }
 
-Cell::Cell(){
-    
-}
+Cell::Cell(){}
 
 int Cell::getX(){
     return this->x;

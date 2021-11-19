@@ -7,12 +7,12 @@ class Cell {
     private:
         sf::Color color;
         int value;
+        int x,y;
 
     public:
-        int x,y;
-        Cell(int value);
-        Cell();
         
+        Cell(int value);
+        Cell(); 
         Cell(sf::Color color, int value);
 
         sf::Color get_color();

@@ -20,7 +20,6 @@ public:
     }
 
     void init();
-    
 
     vector<vector<Cell>> get_maze(){
         return this->maze;
@@ -38,9 +37,10 @@ void Grid::init(){
     ::ShowWindow(::GetConsoleWindow(), SW_HIDE);
 
     int maze_size = 89;
+    int coef = 10;
 
     sf::RenderWindow window(
-        sf::VideoMode(maze_size * 10, maze_size * 10),
+        sf::VideoMode(maze_size * coef, maze_size * coef),
         "Labyrinthe",
         sf::Style::Titlebar | sf::Style::Close | !sf::Style::Resize
     );
@@ -54,15 +54,5 @@ void Grid::init(){
     generate_maze(window,maze,maze_size,true);
     solve_maze(window, maze, maze_size);
 
-    while(window.isOpen()){
-        
-        sf::Event event;
-
-        while(window.pollEvent(event)) {
-            if(event.type == sf::Event::Closed)
-                window.close();
-        }
-
-    
-    }
+    window.close();
 }

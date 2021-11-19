@@ -160,7 +160,7 @@ void generate_maze(sf::RenderWindow& window,vector<vector<Cell>> &maze, int maze
 
     if (complex){
 
-        for (int i = 0 ; i < maze_size ;i++){
+        for (int i = 0 ; i < maze_size  ;i++){
             int x = rand() % (maze_size - 2) + 1;
             int y;
 
@@ -175,13 +175,6 @@ void generate_maze(sf::RenderWindow& window,vector<vector<Cell>> &maze, int maze
 
         update_grid_graphics(window,maze,maze_size);
     }
-}
-
-
-int distance(Cell cell_1, Cell cell_2){
-    float tmp1 = ( cell_1.getX() - cell_2.getX() )^2;
-    float tmp2 = ( cell_1.getY() + cell_2.getY() )^2;
-    return static_cast<int>(sqrt(  tmp1 + tmp2 ));
 }
 
 void set_neighbour(vector<vector<Cell>> &maze, Cell cell, int etape, int maze_size, int x, int y){
@@ -240,6 +233,7 @@ void solve_maze(sf::RenderWindow &window, vector<vector<Cell>> &maze, int maze_s
             for (int j = y - 1 ; j < y + 2 ; j++){
                 if (i != x && j != y)
                     continue;
+
                 if (maze[i][j].get_value() == etape - 1){
                     tmp = &maze[i][j];
                     maze[i][j].set_color(sf::Color(0,255,0));
